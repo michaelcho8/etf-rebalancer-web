@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Free ETF Portfolio Rebalancer | Calculate How to Rebalance</title>
+  <meta name="description" content="Free ETF portfolio rebalancer. Enter your current holdings, choose a target allocation (SCHD/VIG/JEPI or custom), and instantly see what to buy or sell. Includes FIRE progress tracker." />
+  <meta name="keywords" content="ETF rebalancer, portfolio rebalancer, SCHD VIG JEPI allocation, how to rebalance ETF, dividend portfolio calculator, FIRE calculator, free portfolio tool" />
+  <link rel="canonical" href="https://YOURDOMAIN.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free ETF Portfolio Rebalancer" />
+  <meta property="og:description" content="Enter your holdings, pick a target allocation, and see exactly what to buy or sell. Free forever." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://YOURDOMAIN.com/" />
+
+  <!-- JSON-LD schema for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ETF Portfolio Rebalancer",
+    "description": "Free tool to calculate how to rebalance your ETF portfolio to any target allocation. Includes FIRE progress tracker.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2584209104913819" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>ETF Portfolio Rebalancer</h1>
+      <p class="tagline">Enter your holdings. Pick a target. See exactly what to buy or sell — free, instant, no account needed.</p>
+    </div>
+  </header>
+
+  <!-- Ad: leaderboard below hero -->
+  <div class="ad-slot container">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2584209104913819"
+      data-ad-slot="SLOT_ID_HERE" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <main class="container">
+
+    <!-- Step 1: Holdings -->
+    <section class="card" id="section-holdings">
+      <h2><span class="step-badge">1</span> Your Current Holdings</h2>
+      <p class="hint">Enter each ETF symbol and its current dollar value.</p>
+
+      <div class="table-wrapper">
+        <table id="holdings-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Current Value ($)</th>
+              <th>Weight</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="holdings-body">
+            <!-- rows injected by main.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-actions">
+        <button id="add-row-btn" class="btn-secondary">+ Add Row</button>
+        <span id="total-display" class="total-display">Total: $0</span>
+      </div>
+    </section>
+
+    <!-- Step 2: Target Allocation -->
+    <section class="card" id="section-target">
+      <h2><span class="step-badge">2</span> Target Allocation</h2>
+      <p class="hint">Choose a preset or enter custom percentages (must sum to 100%).</p>
+
+      <div class="preset-buttons" id="preset-buttons">
+        <!-- injected by main.js -->
+      </div>
+
+      <div class="table-wrapper">
+        <table id="allocation-table">
+          <thead>
+            <tr><th>Symbol</th><th>Target %</th></tr>
+          </thead>
+          <tbody id="allocation-body">
+            <!-- injected by main.js -->
+          </tbody>
+        </table>
+      </div>
+      <p id="allocation-error" class="error-msg hidden">Percentages must sum to 100%.</p>
+
+      <button id="calculate-btn" class="btn-primary">Calculate Rebalance</button>
+    </section>
+
+    <!-- Step 3: Results -->
+    <section class="card hidden" id="section-results">
+      <h2><span class="step-badge">3</span> Results</h2>
+
+      <div class="charts-row">
+        <div class="chart-box">
+          <p class="chart-label">Current Allocation</p>
+          <canvas id="chart-current"></canvas>
+        </div>
+        <div class="chart-box">
+          <p class="chart-label">Target Allocation</p>
+          <canvas id="chart-target"></canvas>
+        </div>
+      </div>
+
+      <h3>Rebalancing Orders</h3>
+      <div class="table-wrapper">
+        <table id="orders-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Current</th>
+              <th>Target</th>
+              <th>Action</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Ad: mid-page rectangle -->
+      <div class="ad-slot ad-mid">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2584209104913819"
+          data-ad-slot="SLOT_ID_HERE" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- FIRE Progress -->
+      <div class="fire-section">
+        <h3>FIRE Progress</h3>
+        <p class="hint">How far along is this portfolio toward financial independence?</p>
+
+        <div class="fire-inputs">
+          <label>
+            Annual expenses in retirement ($)
+            <input type="number" id="annual-expenses" value="40000" min="1000" step="1000" />
+          </label>
+          <label>
+            Monthly contribution ($)
+            <input type="number" id="monthly-contribution" value="500" min="0" step="50" />
+          </label>
+          <label>
+            Expected annual return (%)
+            <input type="number" id="annual-return" value="7" min="1" max="20" step="0.5" />
+          </label>
+        </div>
+
+        <div class="fire-results" id="fire-results"></div>
+      </div>
+    </section>
+
+    <!-- Email capture -->
+    <section class="card email-capture">
+      <h2>Get the Free Weekly Dividend Digest</h2>
+      <p>SCHD/VIG/JEPI yield updates, rebalancing signals, and FIRE progress benchmarks — straight to your inbox. No spam.</p>
+      <form class="email-form" id="email-form">
+        <input type="email" id="email-input" placeholder="your@email.com" required />
+        <button type="submit" class="btn-primary">Subscribe Free</button>
+      </form>
+      <p class="email-note" id="email-note"></p>
+    </section>
+
+    <!-- Automate CTA -->
+    <section class="card cta-card">
+      <h2>Want to Automate This?</h2>
+      <p>The Python version of this tool connects directly to Alpaca and rebalances your portfolio automatically on a schedule. Open source, free to use.</p>
+      <a href="https://github.com/YOURUSERNAME/alpaca-rebalancer" class="btn-secondary" target="_blank" rel="noopener">View on GitHub →</a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Free tool. Not financial advice. Always do your own research before investing.</p>
+      <p class="footer-links">
+        <a href="#">Privacy Policy</a> · <a href="#">About</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Ad: footer -->
+  <div class="ad-slot container ad-footer">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2584209104913819"
+      data-ad-slot="SLOT_ID_HERE" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="calc.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
