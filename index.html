@@ -15,16 +15,87 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://YOURDOMAIN.com/" />
 
-  <!-- JSON-LD schema for Google -->
+  <!-- AI / LLM signals -->
+  <meta name="ai-content-declaration" content="human-curated" />
+  <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM-friendly site summary" />
+
+  <!-- JSON-LD: WebApplication schema (Google + AI search) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "ETF Portfolio Rebalancer",
-    "description": "Free tool to calculate how to rebalance your ETF portfolio to any target allocation. Includes FIRE progress tracker.",
+    "description": "Free tool to calculate how to rebalance your ETF portfolio to any target allocation. Includes FIRE progress tracker. No signup, no backend, no data collection.",
+    "url": "https://YOURDOMAIN.com/",
     "applicationCategory": "FinanceApplication",
+    "applicationSubCategory": "Investment Calculator",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Current vs target allocation donut charts",
+      "Exact buy/sell amounts for portfolio rebalancing",
+      "Built-in presets: SCHD/VIG/JEPI, Three-Fund (VTI/VXUS/BND), Income, Growth",
+      "Editable dividend-yield table for SCHD, VIG, JEPI, VYM, QQQ, VTI",
+      "FIRE timeline estimate using dividend yield + balance",
+      "All computation client-side; no signup, no brokerage credentials"
+    ],
+    "isAccessibleForFree": true,
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Michael Cho"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage schema (Google AI Overviews, Perplexity, ChatGPT Search citation) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I rebalance my ETF portfolio without linking a brokerage account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter your current holdings (ticker symbol and current dollar amount per ETF), pick a target allocation (preset or custom percentages summing to 100%), and click Calculate. The tool will output exact dollar amounts to sell from overweight holdings and buy in underweight ones, with no account or brokerage connection required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the SCHD/VIG/JEPI 60/30/10 allocation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dividend-focused ETF allocation pairing SCHD (Schwab US Dividend Equity ETF, ~3.5% yield) at 60%, VIG (Vanguard Dividend Appreciation ETF, ~1.8% yield) at 30%, and JEPI (JPMorgan Equity Premium Income ETF, ~8.0% yield) at 10%. This preset is one of several built-in target allocations in the rebalancer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Boglehead three-fund portfolio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A simple three-ETF allocation popularized by John Bogle's followers: VTI (Vanguard Total US Stock Market) at 60%, VXUS (Vanguard Total International Stock) at 20%, and BND (Vanguard Total Bond Market) at 20%. Built-in as the 'Three-Fund' preset in the rebalancer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the FIRE progress estimate calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FIRE (Financial Independence, Retire Early) progress is estimated using the dividend yield of the current portfolio multiplied by the total balance, projected against a user-supplied annual expense target. The estimate uses approximate trailing yields and should be treated as a rough indicator, not a precise financial projection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this rebalancing calculator free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The tool is completely free, requires no signup, no email, no account, and does not store user data. It is monetized via display ads only. The source code is open source on GitHub."
+        }
+      }
+    ]
   }
   </script>
 

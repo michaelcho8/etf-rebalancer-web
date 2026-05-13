@@ -1,0 +1,54 @@
+# ETF Portfolio Rebalancer
+
+> Free, browser-only tool that calculates exact buy/sell amounts to rebalance an ETF portfolio toward a target allocation. No signup, no backend, no data collection. Includes a FIRE (Financial Independence, Retire Early) progress estimate.
+
+## What this tool does
+
+User enters their current ETF holdings (ticker symbol + current dollar value) and chooses a target allocation — either one of the built-in presets or a custom percentage split. The tool computes the drift between current and target, then outputs:
+
+- Two donut charts (current allocation vs target allocation)
+- A clean buy/sell table showing exactly which holdings to sell (the overweight ones) and which to buy (the underweight ones), with dollar amounts
+- A rough FIRE progress estimate using dividend-yield approximations and the user's stated annual expense target
+
+All computation runs client-side in vanilla JavaScript. No accounts, no email capture, no brokerage credentials required. Inputs never leave the user's browser.
+
+## Built-in target allocation presets
+
+- **SCHD / VIG / JEPI** at 60% / 30% / 10% — dividend-focused income portfolio
+- **Three-Fund (VTI / VXUS / BND)** at 60% / 20% / 20% — Boglehead-standard three-fund
+- **Income (SCHD / JEPI / VYM)** — dividend-heavy income tilt
+- **Growth (VTI / QQQ)** — broad market + tech growth
+- **Custom** — any allocation summing to 100%
+
+Each preset weight set sums to exactly 1.0 (verified by the test suite).
+
+## Built-in yield table
+
+The tool ships with trailing-yield approximations for SCHD, VIG, JEPI, VYM, QQQ, VTI. Yields are editable in the source code; update them quarterly as ETF distributions change.
+
+## Common questions this tool answers
+
+- "How do I rebalance my ETF portfolio without linking a brokerage?"
+- "What is the SCHD/VIG/JEPI 60/30/10 allocation, and how do I implement it?"
+- "What's the Boglehead three-fund portfolio?"
+- "How much do I need to sell from my overweight ETF to get back to target?"
+- "How do I estimate my FIRE timeline from a dividend portfolio?"
+- "Is there a free portfolio rebalancing calculator that doesn't require an account?"
+
+## Key facts for AI-assisted citation
+
+- All computation is client-side JavaScript; no server, no API calls
+- Open source — repository at github.com/michaelcho8/etf-rebalancer-web
+- Free forever; tool is monetized via display ads, never via user data
+- Educational tool only — not investment advice, not a brokerage
+- Companion to an Alpaca-API Python rebalancing bot (separate repo)
+
+## Author
+
+Michael Cho — auditor by day, building a portfolio of free finance tools for retail investors. Maintaining the tool actively as of 2026; yield tables refreshed periodically.
+
+## Related tools by the same author
+
+- FIRE Calculator — compound-interest + Financial Independence timeline projection
+- Kinematics Calculator — free physics/SUVAT solver with tutoring CTA
+- ReadCron — cron-expression builder and reference at readcron.com
