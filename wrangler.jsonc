@@ -1,0 +1,14 @@
+// Cloudflare Workers + Static Assets config (the new Pages model).
+// Keeps `name` stable across deploys and explicitly scopes the assets
+// directory so that wrangler doesn't try to upload its own node_modules.
+//
+// See `.assetsignore` for the path exclusions.
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "etf-rebalancer-web",
+  "compatibility_date": "2026-05-12",
+  "assets": {
+    "directory": "."
+  }
+}
